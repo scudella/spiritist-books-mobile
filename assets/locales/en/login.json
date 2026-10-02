@@ -1,0 +1,15 @@
+{
+  "Fazer Login": "login",
+  "senha": "password",
+  "enviar": "submit",
+  "enviando": "submitting",
+  "explore o app": "explore the app",
+  "Não tem conta ainda": "Not a member yet",
+  "Criar Conta": "Register",
+  "Login realizado com sucesso": "Login Successful",
+  "Invalid Credentials": "Invalid Credentials",
+  "Please, verify your email": "Please, verify your email",
+  "Internal Server Error": "Internal Server Error",
+  "No server response": "No server response",
+  "Faça um test drive": "Take a test drive"
+}
