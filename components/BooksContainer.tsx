@@ -1,16 +1,22 @@
+import {useNavigation} from '@react-navigation/native';
 import Book from './Book';
-import {useAllBooksContext} from '../screens/SearchScreen';
+import {RootStackParamList, useAllBooksContext} from '../screens/SearchScreen';
 import {useTranslation} from 'react-i18next';
 import {
   ActivityIndicator,
   FlatList,
+  Pressable,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import {colors} from '../theme/colors';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const BooksContainer = () => {
+  const navigation = useNavigation<NavigationProp>();
   const {data, fetchNextPage, isLoadingMore, isRefreshing, handleRefresh} =
     useAllBooksContext();
   const {books, totalBooks} = data;
@@ -56,19 +62,24 @@ const BooksContainer = () => {
           }
           renderItem={(itemData) => {
             return (
-              <Book
-                title={itemData.item.title}
-                authors={itemData.item.authors}
-                spiritualAuthors={itemData.item.spiritualAuthors}
-                currentPublisher={itemData.item.currentPublisher}
-                publishedYear={itemData.item.publishedYear}
-                index={itemData.item.index}
-                // onPress={() =>
-                //   navigation.navigate('BookDetail', {
-                //     categoryId: itemData.item.id,
-                //   })
-                // }
-              />
+              <Pressable
+                android_ripple={{color: colors.primary['900']}}
+                style={({pressed}) => (pressed ? styles.cardPressed : null)}
+                onPress={() =>
+                  navigation.navigate('BookDetails', {
+                    bookId: itemData.item.index,
+                  })
+                }
+              >
+                <Book
+                  title={itemData.item.title}
+                  authors={itemData.item.authors}
+                  spiritualAuthors={itemData.item.spiritualAuthors}
+                  currentPublisher={itemData.item.currentPublisher}
+                  publishedYear={itemData.item.publishedYear}
+                  index={itemData.item.index}
+                />
+              </Pressable>
             );
           }}
         />
@@ -104,5 +115,8 @@ const styles = StyleSheet.create({
   },
   footerLoader: {
     marginVertical: 16,
+  },
+  cardPressed: {
+    opacity: 0.5,
   },
 });

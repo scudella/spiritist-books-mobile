@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TextStyle, View} from 'react-native';
 import {colors} from '../theme/colors';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import {ComponentProps} from 'react';
@@ -7,13 +7,26 @@ type BookInfoProps = {
   icon: ComponentProps<typeof Ionicons>['name'];
   label?: string;
   text?: string;
+  iconStyle?: TextStyle;
+  labelStyle?: TextStyle;
 };
 
-const BookInfo = ({icon, label, text}: BookInfoProps) => {
+const BookInfo = ({
+  icon,
+  label,
+  text,
+  iconStyle,
+  labelStyle,
+}: BookInfoProps) => {
   return (
     <View style={styles.container}>
-      <Ionicons style={styles.bookIcon} name={icon} color='white' size={16} />
-      {label && <Text style={styles.bookLabel}>{label}</Text>}
+      <Ionicons
+        style={[styles.bookIcon, iconStyle]}
+        name={icon}
+        color='white'
+        size={16}
+      />
+      {label && <Text style={[styles.bookLabel, labelStyle]}>{label}</Text>}
       {text && <Text style={styles.bookText}>{text}</Text>}
     </View>
   );

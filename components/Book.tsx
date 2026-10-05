@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import BookInfo from './BookInfo';
 import {useTranslation} from 'react-i18next';
 import {colors} from '../theme/colors';
@@ -36,10 +36,18 @@ const Book = ({
       <View style={styles.content}>
         <View style={styles.contentCenter}>
           <View style={styles.infoContainer}>
-            <BookInfo icon='book-outline' label={currentPublisher} />
+            <BookInfo
+              icon='book-outline'
+              label={currentPublisher}
+              labelStyle={styles.labelStyle}
+            />
           </View>
           <View style={styles.infoContainer2}>
-            <BookInfo icon='calendar' label={publishedYear} />
+            <BookInfo
+              icon='calendar'
+              label={publishedYear}
+              labelStyle={styles.labelStyle}
+            />
           </View>
         </View>
         <View style={styles.contentCenter}>
@@ -51,6 +59,7 @@ const Book = ({
                   ? t('Autor(a) Espiritual')
                   : t('Autores Espirituais')
               }
+              labelStyle={styles.labelStyle}
             />
           </View>
           <View style={styles.infoContainer2}>
@@ -76,9 +85,14 @@ const styles = StyleSheet.create({
   rootContainer: {
     backgroundColor: '#3f3f3f',
     borderRadius: 8,
-    overflow: 'hidden',
-    marginHorizontal: 8,
-    marginBottom: 6,
+    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    marginHorizontal: 10,
+    marginBottom: 10,
+    elevation: 4,
+    shadowColor: 'black',
+    shadowOpacity: 0.35,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 16,
   },
   header: {
     paddingVertical: 16,
@@ -105,12 +119,12 @@ const styles = StyleSheet.create({
   infoTitle: {
     marginBottom: 8,
     // textTransform: 'none',
-    color: colors.primary[600],
+    color: colors.primary[300],
   },
   infoText: {
     margin: 0,
     letterSpacing: 1,
-    color: colors.secondary[500],
+    color: colors.secondary[300],
   },
   content: {
     paddingVertical: 12,
@@ -126,5 +140,8 @@ const styles = StyleSheet.create({
   },
   infoContainer2: {
     flex: 0.9,
+  },
+  labelStyle: {
+    color: colors.primary['300'],
   },
 });

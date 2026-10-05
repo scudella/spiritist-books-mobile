@@ -18,6 +18,7 @@ import axiosError from '../utils/axiosError';
 
 export type RootStackParamList = {
   SearchBooks: undefined;
+  BookDetails: {bookId: string};
 };
 
 export type SearchScreenProps = NativeStackScreenProps<RootStackParamList>;
