@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import Book from './Book';
-import {RootStackParamList, useAllBooksContext} from '../screens/SearchScreen';
+import type {RootStackParamList} from '../screens/SearchScreen';
 import {useTranslation} from 'react-i18next';
 import {
   ActivityIndicator,
@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {colors} from '../theme/colors';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useAllBooksContext} from '../context/AllBooksContext';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 

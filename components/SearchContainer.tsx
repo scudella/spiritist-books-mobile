@@ -2,12 +2,9 @@ import {StyleSheet, View} from 'react-native';
 import FormRow from './FormRow';
 import {useTranslation} from 'react-i18next';
 import {colors} from '../theme/colors';
-import {
-  useAllBooksContext,
-  SearchField,
-  SearchText,
-} from '../screens/SearchScreen';
+import {SearchField, SearchText} from '../screens/SearchScreen';
 import {useEffect, useRef} from 'react';
+import {useAllBooksContext} from '../context/AllBooksContext';
 
 function SearchContainer() {
   const {t} = useTranslation('addBook');

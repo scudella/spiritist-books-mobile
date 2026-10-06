@@ -1,13 +1,4 @@
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import Toast from 'react-native-toast-message';
@@ -15,6 +6,7 @@ import BooksContainer from '../components/BooksContainer';
 import SearchContainer from '../components/SearchContainer';
 import customFetch from '../utils/customFetch';
 import axiosError from '../utils/axiosError';
+import {AllBooksContext} from '../context/AllBooksContext';
 
 export type RootStackParamList = {
   SearchBooks: undefined;
@@ -22,7 +14,6 @@ export type RootStackParamList = {
 };
 
 export type SearchScreenProps = NativeStackScreenProps<RootStackParamList>;
-
 export interface Book {
   index: string;
   title: string;
@@ -39,22 +30,6 @@ export type SearchField =
   | 'spiritualAuthors'
   | 'publishedYear';
 export type SearchText = Partial<Record<SearchField, string>>;
-
-interface AllBooksContextType {
-  data: {books: Book[]; nbPages: number; totalBooks: number};
-  searchParams: SearchText;
-  setSearchParams: Dispatch<SetStateAction<SearchText>>;
-  handleSearch: (params?: SearchText) => void;
-  fetchNextPage: () => void;
-  isRefreshing: boolean;
-  isLoadingMore: boolean;
-  isInitialLoading: boolean;
-  handleRefresh: () => void;
-}
-
-const AllBooksContext = createContext<AllBooksContextType | undefined>(
-  undefined,
-);
 
 function SearchScreen() {
   const [data, setData] = useState<{
@@ -191,16 +166,6 @@ function SearchScreen() {
   );
 }
 export default SearchScreen;
-
-export const useAllBooksContext = (): AllBooksContextType => {
-  const context = useContext(AllBooksContext);
-  if (!context) {
-    throw new Error(
-      'useAllBooksContext must be used within an AllBooksProvider',
-    );
-  }
-  return context;
-};
 
 const styles = StyleSheet.create({
   container: {
