@@ -25,7 +25,7 @@ const BooksContainer = () => {
 
   if (books.length === 0) {
     return (
-      <View style={styles.rootContainer}>
+      <View style={styles.noBooks}>
         <Text style={styles.text}>
           {t('Não há livros para mostrar') + '...'}
         </Text>
@@ -93,7 +93,11 @@ export default BooksContainer;
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
+  },
+  noBooks: {
+    flex: 1,
     alignItems: 'center',
+    paddingTop: 16,
   },
   textContainer: {
     flex: 1,
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    color: colors.secondary[700],
+    color: colors.secondary[400],
   },
   footerLoader: {
     marginVertical: 16,

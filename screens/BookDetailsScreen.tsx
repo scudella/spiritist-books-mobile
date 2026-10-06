@@ -29,7 +29,6 @@ export interface Book {
 }
 
 function BookDetailsScreen({route}: BookDetailsScreenProps) {
-  console.log('Book detail screen');
   const [book, setBook] = useState<Book>();
   const bookId = route.params.bookId;
 
