@@ -79,6 +79,7 @@ const BooksContainer = () => {
                   currentPublisher={itemData.item.currentPublisher}
                   publishedYear={itemData.item.publishedYear}
                   index={itemData.item.index}
+                  cover={itemData.item.originalCover}
                 />
               </Pressable>
             );

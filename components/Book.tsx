@@ -1,4 +1,4 @@
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Image, Platform, StyleSheet, Text, View} from 'react-native';
 import BookInfo from './BookInfo';
 import {useTranslation} from 'react-i18next';
 import {colors} from '../theme/colors';
@@ -10,6 +10,7 @@ type BookProps = {
   spiritualAuthors: string;
   currentPublisher: string;
   publishedYear: string;
+  cover: string;
 };
 
 const Book = ({
@@ -19,20 +20,28 @@ const Book = ({
   spiritualAuthors,
   currentPublisher,
   publishedYear,
+  cover,
 }: BookProps) => {
   const {t} = useTranslation('book');
 
   return (
     <View style={styles.rootContainer}>
       <View style={styles.header}>
-        <View style={styles.linkContainer}>
-          <Text style={styles.mainIcon}>{authors[0].charAt(0)}</Text>
-        </View>
-        <View>
+        {cover ? (
+          <View style={styles.imageContainer}>
+            <Image source={{uri: cover}} style={styles.image} />
+          </View>
+        ) : (
+          <View>
+            <Text style={styles.mainIcon}>{authors[0].charAt(0)}</Text>
+          </View>
+        )}
+        <View style={styles.textContainer}>
           <Text style={styles.infoTitle}>{title}</Text>
           <Text style={styles.infoText}>{authors.join(', ')}</Text>
         </View>
       </View>
+      <View style={styles.horizontalSeparator}></View>
       <View style={styles.content}>
         <View style={styles.contentCenter}>
           <View style={styles.infoContainer}>
@@ -98,11 +107,28 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 24,
     flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
     alignItems: 'center',
   },
-  linkContainer: {},
+  horizontalSeparator: {
+    width: '90%',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#f0f0f0',
+    marginTop: 6,
+    alignSelf: 'center',
+  },
+  imageContainer: {
+    marginRight: 16,
+  },
+  image: {
+    borderRadius: 6,
+    width: 40,
+    height: 45,
+    resizeMode: 'contain',
+  },
+  textContainer: {
+    flex: 1,
+    flexDirection: 'column',
+  },
   mainIcon: {
     width: 60,
     height: 60,
@@ -118,11 +144,9 @@ const styles = StyleSheet.create({
   },
   infoTitle: {
     marginBottom: 8,
-    // textTransform: 'none',
     color: colors.primary[300],
   },
   infoText: {
-    margin: 0,
     letterSpacing: 1,
     color: colors.secondary[300],
   },
