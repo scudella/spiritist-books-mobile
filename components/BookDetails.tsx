@@ -58,118 +58,126 @@ const BookDetails = ({
 
   return (
     <>
-      <View style={styles.rootContainer}>
-        <View style={styles.header}>
-          <View>{originalCover && <BookThumbnail src={originalCover} />}</View>
-          <View style={styles.info}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.authors}>{authors.join(', ')}</Text>
-          </View>
-        </View>
-        <View style={styles.listSpAuthors}>
-          {spiritualAuthors.length === 1 ? (
-            <>
-              <Text style={styles.spAuthorTitle}>
-                {t('Autor(a) Espiritual')}
-              </Text>
-              <View style={styles.spAuthors}>
-                <BookInfo icon='star-outline' label={spiritualAuthors[0]} />
+      <FlatList
+        data={[null]} // Dummy array with one item
+        renderItem={() => (
+          <View style={styles.rootContainer}>
+            <View style={styles.header}>
+              <View>
+                {originalCover && <BookThumbnail src={originalCover} />}
               </View>
-            </>
-          ) : (
-            <>
-              <FlatList
-                ListHeaderComponent={
+              <View style={styles.info}>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.authors}>{authors.join(', ')}</Text>
+              </View>
+            </View>
+            <View style={styles.listSpAuthors}>
+              {spiritualAuthors.length === 1 ? (
+                <>
                   <Text style={styles.spAuthorTitle}>
-                    {t('Autores Espirituais')}
+                    {t('Autor(a) Espiritual')}
                   </Text>
-                }
-                keyExtractor={(index) => index.toString()}
-                data={spiritualAuthors}
-                renderItem={renderItem}
-              />
-            </>
-          )}
-        </View>
-        <View style={styles.separator}></View>
+                  <View style={styles.spAuthors}>
+                    <BookInfo icon='star-outline' label={spiritualAuthors[0]} />
+                  </View>
+                </>
+              ) : (
+                <>
+                  <FlatList
+                    ListHeaderComponent={
+                      <Text style={styles.spAuthorTitle}>
+                        {t('Autores Espirituais')}
+                      </Text>
+                    }
+                    keyExtractor={(index) => index.toString()}
+                    data={spiritualAuthors}
+                    renderItem={renderItem}
+                  />
+                </>
+              )}
+            </View>
+            <View style={styles.separator}></View>
 
-        <View style={styles.content}>
-          <View style={styles.contentItem}>
-            <BookInfo
-              icon={'book-outline'}
-              label={`${t('editora atual')}`}
-              text={`${currentPublisher}`}
-              iconStyle={styles.label}
-              labelStyle={styles.label}
-            />
+            <View style={styles.content}>
+              <View style={styles.contentItem}>
+                <BookInfo
+                  icon={'book-outline'}
+                  label={`${t('editora atual')}`}
+                  text={`${currentPublisher}`}
+                  iconStyle={styles.label}
+                  labelStyle={styles.label}
+                />
+              </View>
+              <View style={styles.contentItem}>
+                <BookInfo
+                  icon={'book-outline'}
+                  label={`${t('editora original')}`}
+                  text={`${originalPublisher}`}
+                  iconStyle={styles.label}
+                  labelStyle={styles.label}
+                />
+              </View>
+              <View style={styles.contentItem}>
+                <BookInfo
+                  icon={'calendar'}
+                  label={`${t('ano da publicação')}`}
+                  text={`${publishedYear}`}
+                  iconStyle={styles.label}
+                  labelStyle={styles.label}
+                />
+              </View>
+              <View style={styles.contentItem}>
+                {yearPsychography.length > 0 && (
+                  <BookInfo
+                    icon={'calendar'}
+                    label={`${
+                      yearPsychography.length !== 1
+                        ? t('ano(s) da psicografia')
+                        : t('ano da psicografia')
+                    }`}
+                    text={`${yearPsychography.join(' / ')}`}
+                    iconStyle={styles.label}
+                    labelStyle={styles.label}
+                  />
+                )}
+              </View>
+              <View style={styles.contentItem}>
+                <BookInfo
+                  icon={'calendar'}
+                  label={'Copyright'}
+                  text={`${copyright ? copyright : publishedYear}`}
+                  iconStyle={styles.label}
+                  labelStyle={styles.label}
+                />
+              </View>
+              <View style={styles.contentItem}>
+                {isbn10.length > 0 && (
+                  <BookInfo
+                    icon={'checkmark-outline'}
+                    label={'ISBN-10'}
+                    text={`${isbn10.join(` / `)}`}
+                    iconStyle={styles.label}
+                    labelStyle={styles.label}
+                  />
+                )}
+              </View>
+              <View style={styles.contentItem}>
+                {isbn13.length > 0 && (
+                  <BookInfo
+                    icon={'checkmark-outline'}
+                    label={'ISBN-13'}
+                    text={`${isbn13.join(' / ')}`}
+                    iconStyle={styles.label}
+                    labelStyle={styles.label}
+                  />
+                )}
+              </View>
+            </View>
+            <MultiBrowse thumbs={thumbs} />
           </View>
-          <View style={styles.contentItem}>
-            <BookInfo
-              icon={'book-outline'}
-              label={`${t('editora original')}`}
-              text={`${originalPublisher}`}
-              iconStyle={styles.label}
-              labelStyle={styles.label}
-            />
-          </View>
-          <View style={styles.contentItem}>
-            <BookInfo
-              icon={'calendar'}
-              label={`${t('ano da publicação')}`}
-              text={`${publishedYear}`}
-              iconStyle={styles.label}
-              labelStyle={styles.label}
-            />
-          </View>
-          <View style={styles.contentItem}>
-            {yearPsychography.length > 0 && (
-              <BookInfo
-                icon={'calendar'}
-                label={`${
-                  yearPsychography.length !== 1
-                    ? t('ano(s) da psicografia')
-                    : t('ano da psicografia')
-                }`}
-                text={`${yearPsychography.join(' / ')}`}
-                iconStyle={styles.label}
-                labelStyle={styles.label}
-              />
-            )}
-          </View>
-          <View style={styles.contentItem}>
-            <BookInfo
-              icon={'calendar'}
-              label={'Copyright'}
-              text={`${copyright ? copyright : publishedYear}`}
-              iconStyle={styles.label}
-              labelStyle={styles.label}
-            />
-          </View>
-          <View style={styles.contentItem}>
-            {isbn10.length > 0 && (
-              <BookInfo
-                icon={'checkmark-outline'}
-                label={'ISBN-10'}
-                text={`${isbn10.join(` / `)}`}
-                iconStyle={styles.label}
-                labelStyle={styles.label}
-              />
-            )}
-          </View>
-          <View style={styles.contentItem}>
-            {isbn13.length > 0 && (
-              <BookInfo
-                icon={'checkmark-outline'}
-                label={'ISBN-13'}
-                text={`${isbn13.join(' / ')}`}
-                iconStyle={styles.label}
-                labelStyle={styles.label}
-              />
-            )}
-          </View>
-        </View>
-        <MultiBrowse thumbs={thumbs} />
-      </View>
+        )}
+        keyExtractor={() => 'book-details'}
+      />
     </>
   );
 };

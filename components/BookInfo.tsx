@@ -27,7 +27,9 @@ const BookInfo = ({
         size={16}
       />
       {label && <Text style={[styles.bookLabel, labelStyle]}>{label}</Text>}
-      {text && <Text style={styles.bookText}>{text}</Text>}
+      <View style={styles.column}>
+        {text && <Text style={styles.bookText}>{text}</Text>}
+      </View>
     </View>
   );
 };
@@ -56,5 +58,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     fontSize: 12,
     color: colors.secondary[300],
+  },
+  column: {
+    flex: 1,
   },
 });
