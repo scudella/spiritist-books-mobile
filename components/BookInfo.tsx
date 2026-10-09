@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bookIcon: {
-    marginRight: 16,
+    marginRight: 6,
     alignItems: 'center',
     color: colors.secondary[500],
   },
@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     padding: 2,
     paddingRight: 8,
     fontSize: 14,
-    marginRight: 4,
     color: colors.primary[600],
   },
   bookText: {

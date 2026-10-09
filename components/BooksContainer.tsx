@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   textContainer: {
-    flex: 1,
+    flex: 1.5,
   },
   resultText: {
     color: colors.secondary[400],

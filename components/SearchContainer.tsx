@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   larger: {
-    flex: 3,
+    flex: 2,
   },
   larger1: {
     flex: 1.2,

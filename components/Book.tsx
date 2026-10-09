@@ -55,6 +55,7 @@ const Book = ({
             <BookInfo
               icon='calendar'
               label={publishedYear}
+              iconStyle={styles.iconStyle}
               labelStyle={styles.labelStyle}
             />
           </View>
@@ -75,6 +76,7 @@ const Book = ({
             {spiritualAuthors.length > 0 && (
               <BookInfo
                 icon='star-outline'
+                iconStyle={styles.iconStyle}
                 text={
                   spiritualAuthors.length === 1
                     ? spiritualAuthors
@@ -167,5 +169,9 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     color: colors.primary['300'],
+    textTransform: 'none',
+  },
+  iconStyle: {
+    marginLeft: 4,
   },
 });

@@ -57,11 +57,11 @@ const BookDetails = ({
   };
 
   return (
-    <>
+    <View style={styles.rootContainer}>
       <FlatList
         data={[null]} // Dummy array with one item
         renderItem={() => (
-          <View style={styles.rootContainer}>
+          <>
             <View style={styles.header}>
               <View>
                 {originalCover && <BookThumbnail src={originalCover} />}
@@ -123,7 +123,7 @@ const BookDetails = ({
                   label={`${t('ano da publicação')}`}
                   text={`${publishedYear}`}
                   iconStyle={styles.label}
-                  labelStyle={styles.label}
+                  labelStyle={styles.label2}
                 />
               </View>
               <View style={styles.contentItem}>
@@ -137,7 +137,7 @@ const BookDetails = ({
                     }`}
                     text={`${yearPsychography.join(' / ')}`}
                     iconStyle={styles.label}
-                    labelStyle={styles.label}
+                    labelStyle={styles.label2}
                   />
                 )}
               </View>
@@ -174,11 +174,11 @@ const BookDetails = ({
               </View>
             </View>
             <MultiBrowse thumbs={thumbs} />
-          </View>
+          </>
         )}
         keyExtractor={() => 'book-details'}
       />
-    </>
+    </View>
   );
 };
 export default BookDetails;
@@ -252,5 +252,9 @@ const styles = StyleSheet.create({
   },
   label: {
     color: colors.primary['300'],
+  },
+  label2: {
+    color: colors.primary['300'],
+    textTransform: 'none',
   },
 });

@@ -41,6 +41,7 @@ function FormRow({
         autoCapitalize={autoCapitalize}
         onChangeText={onChangeText}
         value={value}
+        selectionColor={colors.secondary[500]}
       />
     </View>
   );
@@ -58,10 +59,11 @@ const styles = StyleSheet.create({
     color: colors.primary[100],
     marginBottom: 4,
     textTransform: 'capitalize',
+    letterSpacing: 0.75,
   },
   input: {
     backgroundColor: colors.primary[100],
-    color: colors.primary[700],
+    color: colors.secondary[700],
     padding: 6,
     borderRadius: 6,
     fontSize: 18,
