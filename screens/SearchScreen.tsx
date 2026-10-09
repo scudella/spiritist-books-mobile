@@ -7,6 +7,7 @@ import SearchContainer from '../components/SearchContainer';
 import customFetch from '../utils/customFetch';
 import axiosError from '../utils/axiosError';
 import {AllBooksContext} from '../context/AllBooksContext';
+import IconButton from '../components/IconButton';
 
 export type RootStackParamList = {
   SearchBooks: undefined;
@@ -31,7 +32,7 @@ export type SearchField =
   | 'publishedYear';
 export type SearchText = Partial<Record<SearchField, string>>;
 
-function SearchScreen() {
+function SearchScreen({navigation}: SearchScreenProps) {
   const [data, setData] = useState<{
     books: Book[];
     nbPages: number;
@@ -118,6 +119,18 @@ function SearchScreen() {
   useEffect(() => {
     fetchBooks({}, 1, false);
   }, [fetchBooks]);
+
+  const clearSearch = () => {
+    handleSearch({});
+  };
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return <IconButton icon={'filter-outline'} onPress={clearSearch} />;
+      },
+    });
+  }, [navigation, clearSearch]);
 
   // Handle new search/filters (resets list to page 1)
   const handleSearch = (newParams: SearchText = {}) => {
