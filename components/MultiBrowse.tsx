@@ -7,7 +7,10 @@ type MultiBrowseProps = {
 
 export default function MultiBrowse({thumbs}: MultiBrowseProps) {
   return (
-    <Host matchContents={{vertical: true}} style={{width: '100%'}}>
+    <Host
+      matchContents={{vertical: true}}
+      style={{width: '100%', marginHorizontal: 10}}
+    >
       <HorizontalMultiBrowseCarousel
         preferredItemWidth={100}
         itemSpacing={4}

@@ -42,20 +42,6 @@ const BookDetails = ({
 
   const thumbs = [originalCover, currentCover && currentCover];
 
-  const renderItem = ({item, index}: {item: string; index: number}) => {
-    // Determine background color based on odd/even index
-    const backgroundColor =
-      index % 2 === 0 ? colors.primary['100'] : colors.primary['200'];
-
-    return (
-      <>
-        <View style={[styles.spAuthors, {backgroundColor}]}>
-          <BookInfo icon='star-outline' label={item} />
-        </View>
-      </>
-    );
-  };
-
   return (
     <View style={styles.rootContainer}>
       <FlatList
@@ -72,29 +58,27 @@ const BookDetails = ({
               </View>
             </View>
             <View style={styles.listSpAuthors}>
-              {spiritualAuthors.length === 1 ? (
-                <>
-                  <Text style={styles.spAuthorTitle}>
-                    {t('Autor(a) Espiritual')}
-                  </Text>
-                  <View style={styles.spAuthors}>
-                    <BookInfo icon='star-outline' label={spiritualAuthors[0]} />
+              <Text style={styles.spAuthorTitle}>
+                {spiritualAuthors.length === 1
+                  ? t('Autor(a) Espiritual')
+                  : t('Autores Espirituais')}
+              </Text>
+
+              {spiritualAuthors.map((author, index) => {
+                const backgroundColor =
+                  index % 2 === 0
+                    ? colors.primary['100']
+                    : colors.primary['200'];
+
+                return (
+                  <View
+                    key={`${author}-${index}`}
+                    style={[styles.spAuthors, {backgroundColor}]}
+                  >
+                    <BookInfo icon='star-outline' label={author} />
                   </View>
-                </>
-              ) : (
-                <>
-                  <FlatList
-                    ListHeaderComponent={
-                      <Text style={styles.spAuthorTitle}>
-                        {t('Autores Espirituais')}
-                      </Text>
-                    }
-                    keyExtractor={(index) => index.toString()}
-                    data={spiritualAuthors}
-                    renderItem={renderItem}
-                  />
-                </>
-              )}
+                );
+              })}
             </View>
             <View style={styles.separator}></View>
 
@@ -218,8 +202,7 @@ const styles = StyleSheet.create({
   listSpAuthors: {
     backgroundColor: colors.primary['300'],
     paddingBottom: 10,
-    maxHeight: 160,
-    marginHorizontal: 30,
+    marginHorizontal: 20,
     marginVertical: 20,
     borderRadius: 8,
     borderWidth: 1,
@@ -231,7 +214,7 @@ const styles = StyleSheet.create({
   },
   spAuthors: {
     paddingBottom: 2,
-    paddingLeft: 30,
+    paddingHorizontal: 20,
     backgroundColor: colors.primary['100'],
   },
   separator: {
